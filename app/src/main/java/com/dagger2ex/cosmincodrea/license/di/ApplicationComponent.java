@@ -3,6 +3,8 @@ package com.dagger2ex.cosmincodrea.license.di;
 import android.app.Application;
 
 import com.dagger2ex.cosmincodrea.license.LicenseApplication;
+import com.dagger2ex.cosmincodrea.license.data.ApiModule;
+import com.dagger2ex.cosmincodrea.license.data.pref.AppPrefsModule;
 
 import javax.inject.Singleton;
 
@@ -16,7 +18,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
  */
 
 @Singleton
-@Component(modules = {ActivityBuilder.class, ApplicationModule.class, AndroidInjectionModule.class, AndroidSupportInjectionModule.class})
+@Component(modules = {ActivityBuilder.class, ApplicationModule.class, AndroidInjectionModule.class, AndroidSupportInjectionModule.class, AppPrefsModule.class, ApiModule.class})
 public interface ApplicationComponent {
 
     @Component.Builder

@@ -1,9 +1,12 @@
 package com.dagger2ex.cosmincodrea.license.di;
 
 import android.app.Application;
+import android.arch.persistence.room.Room;
 import android.content.Context;
 
 import com.dagger2ex.cosmincodrea.license.LicenseApplication;
+import com.dagger2ex.cosmincodrea.license.R;
+import com.dagger2ex.cosmincodrea.license.data.repository.AppDatabase;
 
 import javax.inject.Singleton;
 
@@ -27,6 +30,12 @@ public class ApplicationModule {
     @Singleton
     LicenseApplication provideApplication(Application application) {
         return (LicenseApplication) application;
+    }
+
+    @Provides
+    @Singleton
+    AppDatabase provideAppDatabase(Application application) {
+        return Room.databaseBuilder(application, AppDatabase.class, application.getString(R.string.app_name)).build();
     }
 
 }
