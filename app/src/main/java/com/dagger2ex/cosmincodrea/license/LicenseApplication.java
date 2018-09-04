@@ -17,6 +17,7 @@ import dagger.android.HasActivityInjector;
 
 public class LicenseApplication extends Application implements HasActivityInjector {
 
+    @SuppressWarnings("WeakerAccess")
     @Inject
     DispatchingAndroidInjector<Activity> mActivityDispatchingAndroidInjector;
 

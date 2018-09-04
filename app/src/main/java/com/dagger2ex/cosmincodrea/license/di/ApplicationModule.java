@@ -3,6 +3,7 @@ package com.dagger2ex.cosmincodrea.license.di;
 import android.app.Application;
 import android.arch.persistence.room.Room;
 import android.content.Context;
+import android.net.ConnectivityManager;
 
 import com.dagger2ex.cosmincodrea.license.LicenseApplication;
 import com.dagger2ex.cosmincodrea.license.R;
@@ -17,8 +18,8 @@ import dagger.Provides;
  * Created by cosmincodrea on 07/06/2018.
  */
 
-@Module
-public class ApplicationModule {
+@Module(includes = ViewModelsModule.class)
+class ApplicationModule {
 
     @Provides
     @Singleton
@@ -31,6 +32,13 @@ public class ApplicationModule {
     LicenseApplication provideApplication(Application application) {
         return (LicenseApplication) application;
     }
+
+    @Provides
+    @Singleton
+    ConnectivityManager provideConnectivityManager(Application application) {
+        return (ConnectivityManager) application.getSystemService(Context.CONNECTIVITY_SERVICE);
+    }
+
 
     @Provides
     @Singleton

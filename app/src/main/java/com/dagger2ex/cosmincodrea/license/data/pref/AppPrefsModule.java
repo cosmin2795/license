@@ -15,7 +15,6 @@ import dagger.Provides;
  * Created by cosmincodrea on 07/06/2018.
  */
 
-
 @Module
 public class AppPrefsModule {
 
@@ -28,7 +27,7 @@ public class AppPrefsModule {
 //    @Provides
 //    @Singleton
 //    @Named(AppPrefsConstants.LOCATION)
-//    StringPreference provideLocation(SharedPreferences sharedPreferences) {
+//    StringPreference provideLocation(@AppPrefs SharedPreferences sharedPreferences) {
 //        return new StringPreference(sharedPreferences, AppPrefsConstants.LOCATION);
 //    }
 

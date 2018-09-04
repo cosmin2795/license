@@ -1,31 +1,43 @@
 package com.dagger2ex.cosmincodrea.license.page.common;
 
-import android.support.v4.app.Fragment;
+import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
-import dagger.android.AndroidInjector;
-import dagger.android.DispatchingAndroidInjector;
-import dagger.android.support.HasSupportFragmentInjector;
 
 /**
  * Created by cosmincodrea on 07/06/2018.
  */
 
-public class BaseActivity extends AppCompatActivity
-        implements HasSupportFragmentInjector {
+public abstract class BaseActivity<VM extends ViewModel> extends AppCompatActivity {
 
     @Inject
-    DispatchingAndroidInjector<Fragment> mFragmentDispatchingAndroidInjector;
+    ViewModelProvider.Factory mViewModelFactory;
+
+    protected VM mViewModel;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        performDependencyInjection();
+        mViewModel = ViewModelProviders.of(this, mViewModelFactory).get(getViewModelClass());
+    }
 
     protected void inject() {
         AndroidInjection.inject(this);
     }
 
-    @Override
-    public AndroidInjector<Fragment> supportFragmentInjector() {
-        return mFragmentDispatchingAndroidInjector;
+
+    private void performDependencyInjection() {
+        AndroidInjection.inject(this);
     }
+
+    protected abstract Class<VM> getViewModelClass();
+
 }

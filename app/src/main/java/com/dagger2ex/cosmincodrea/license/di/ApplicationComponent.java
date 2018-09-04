@@ -18,8 +18,15 @@ import dagger.android.support.AndroidSupportInjectionModule;
  */
 
 @Singleton
-@Component(modules = {ActivityBuilder.class, ApplicationModule.class, AndroidInjectionModule.class, AndroidSupportInjectionModule.class, AppPrefsModule.class, ApiModule.class})
+@Component(modules = {AndroidInjectionModule.class,
+        AndroidSupportInjectionModule.class,
+        ApplicationModule.class,
+        ActivityBuilder.class,
+        AppPrefsModule.class,
+        ApiModule.class})
 public interface ApplicationComponent {
+
+    void inject(LicenseApplication toolboxApplication);
 
     @Component.Builder
     interface Builder {
@@ -28,7 +35,4 @@ public interface ApplicationComponent {
 
         ApplicationComponent build();
     }
-
-    void inject(LicenseApplication licenseApplication);
-
 }
